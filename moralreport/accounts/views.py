@@ -7,9 +7,11 @@ from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib import messages
 
+
 class CustomLoginView(LoginView):
     template_name = 'login.html'
     authentication_form = AuthenticationForm
+
 
 class SignUpView(FormView):
     template_name = 'signup.html'
@@ -19,9 +21,12 @@ class SignUpView(FormView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        messages.success(self.request, "Registration successful! You are now logged in.")
+        messages.success(
+            self.request, "Registration successful! You are now logged in.")
         from django.http import HttpResponseRedirect
-        return HttpResponseRedirect(reverse_lazy('home'))  # Use explicit HttpResponseRedirect for correct CBV typing
+        # Use explicit HttpResponseRedirect for correct CBV typing
+        return HttpResponseRedirect(reverse_lazy('home'))
+
 
 class RefreshTokenView(TemplateView):
     template_name = 'refresh_token.html'
