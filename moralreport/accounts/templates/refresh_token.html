@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Refresh Session{% endblock %}
+{% block content %}
+  <h2>Refresh your session</h2>
+  <form method="post">
+      {% csrf_token %}
+      <button type="submit">Keep me logged in</button>
+  </form>
+  <p>Your session will be extended!</p>
+{% endblock %}
